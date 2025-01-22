@@ -28,3 +28,5 @@ jobs:
           packages/alc-linux.tar.gz
           packages/alc-win32.zip
           packages/alc-darwin.tar.gz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
