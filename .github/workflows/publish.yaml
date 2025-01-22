@@ -6,29 +6,26 @@ on:
       - created
 
 jobs:
-  archive-and-upload:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
-    - name: Create Archives
+    - name: Package
       run: |
-        mkdir -p archives
-        # Create tar.gz for Linux
-        tar -czvf archives/alc-linux.tar.gz linux
-        # Create zip for Windows
-        zip -r archives/alc-win32.zip win32
-        # Add other platforms as needed
-        tar -czvf archives/alc-darwin.tar.gz darwin
+        mkdir -p packages
+        tar -czvf packages/alc-linux.tar.gz linux
+        zip -r packages/alc-win32.zip win32
+        tar -czvf packages/alc-darwin.tar.gz darwin
 
     - name: Upload Release Assets
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ github.ref_name }}
+        tag: ${{ github.event.release.tag_name }}
         files: |
-          archives/alc-linux.tar.gz
-          archives/alc-win32.zip
-          archives/alc-darwin.tar.gz
+          packages/alc-linux.tar.gz
+          packages/alc-win32.zip
+          packages/alc-darwin.tar.gz
