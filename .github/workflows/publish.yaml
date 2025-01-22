@@ -22,6 +22,8 @@ jobs:
 
     - name: Upload Linux Release Asset
       uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ github.event.release.upload_url }}
         asset_path: packages/alc-linux.tar.gz
@@ -30,6 +32,8 @@ jobs:
 
     - name: Upload Windows Release Asset
       uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ github.event.release.upload_url }}
         asset_path: packages/alc-win32.zip
@@ -38,6 +42,8 @@ jobs:
 
     - name: Upload Darwin Release Asset
       uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ github.event.release.upload_url }}
         asset_path: packages/alc-darwin.tar.gz
